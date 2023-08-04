@@ -47,14 +47,14 @@ export default {
   },
   methods: {
     sendAdd() {
-      console.log("added");
+      // # console.log("added");
       this.$emit("addCourse", this.course.id);
       // console.log(3);
       this.isAdded = true;
     },
     sendRemove() {
       this.$emit("removeCourse", this.course.id);
-      console.log("remove");
+      // # console.log("remove");
       this.isAdded = false;
     },
   },
