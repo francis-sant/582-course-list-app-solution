@@ -6,7 +6,7 @@
       <li>credits : {{ course.credits }}</li>
       <li>hours: {{ course.hours }}</li>
       <li>location: {{ course.location }}</li>
-      <li>
+      <li data-testid="enrollment">
         enrollment: {{ course.enrollment }}
         <span class="status">{{ enrollmentStatus }}</span>
       </li>

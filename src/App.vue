@@ -56,7 +56,7 @@ export default {
           location: "Online",
           instructor: "John Doe",
           id: 3,
-          enrollment: 12,
+          enrollment: 0,
         },
         {
           name: "Node.js",
