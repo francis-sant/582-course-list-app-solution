@@ -13,7 +13,9 @@
       <li>id: {{ course.id }}</li>
     </ul>
 
-    <button v-if="!isFull && !isAdded" @click="sendAdd">Add Course</button>
+    <button data-testid="sendAdd" v-if="!isFull && !isAdded" @click="sendAdd">
+      Add Course
+    </button>
     <button v-else-if="!isFull" @click="sendRemove">Remove Course</button>
   </div>
 </template>
@@ -45,9 +47,9 @@ export default {
   },
   methods: {
     sendAdd() {
-      console.log(1);
+      console.log("added");
       this.$emit("addCourse", this.course.id);
-      console.log(3);
+      // console.log(3);
       this.isAdded = true;
     },
     sendRemove() {
@@ -95,6 +97,7 @@ li {
   list-style: none;
   text-align: left;
 }
+
 .status {
   // rounded corner label for status
   display: inline-block;
