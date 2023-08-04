@@ -22,7 +22,7 @@ describe("CourseItem.vue", () => {
     expect(wrapper.find("p").text()).toBe(course.description);
   });
 
-  it("if enrollment is working", async () => {
+  it("enrollment is working", async () => {
     // expect(wrapper.text()).toBe(course.enrollment);
     const course = {
       name: "Vue.js",
@@ -43,7 +43,6 @@ describe("CourseItem.vue", () => {
     const enrollmentFull = "full";
     await wrapper.setData({ course });
     expect(wrapper.find("span").text()).toBe(enrollmentFull);
-    await wrapper.setData({ course });
   });
 
   it("when the button Add is selected the class is added", async () => {
