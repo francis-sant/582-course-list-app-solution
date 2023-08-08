@@ -22,8 +22,22 @@ describe("CourseItem.vue", () => {
     expect(wrapper.find("p").text()).toBe(course.description);
   });
 
-  it("enrollment is working", async () => {
-    // expect(wrapper.text()).toBe(course.enrollment);
+  it("uses default props when none are provided", async () => {
+    const wrapper = shallowMount(CourseItem);
+    const defaultProps = {
+      id: 0,
+      name: "Course Name",
+      credits: 0,
+      hours: 0,
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis accusantium modi adipisci rem architecto sequi atque mollitia voluptates magnam assumenda at reiciendis aliquid, iusto ab debitis quibusdam molestiae quas commodi?",
+      location: "online",
+      enrollment: 0,
+    };
+    expect(wrapper.vm.course).toEqual(defaultProps);
+  });
+
+  it("it apply Full when enrollment is Full", async () => {
     const course = {
       name: "Vue.js",
       description: "The Progressive JavaScript Framework",
@@ -45,6 +59,26 @@ describe("CourseItem.vue", () => {
     expect(wrapper.find("span").text()).toBe(enrollmentFull);
   });
 
+  it(" enrollment status for empty working", async () => {
+    const course = {
+      enrollment: 0,
+    };
+    const wrapper = shallowMount(CourseItem, {
+      props: { course },
+    });
+    expect(wrapper.vm.enrollmentStatus).toBe("empty");
+  });
+
+  it("computes the enrollmentStatus for spots available", async () => {
+    const course = {
+      enrollment: 10,
+    };
+    const wrapper = shallowMount(CourseItem, {
+      props: { course },
+    });
+    expect(wrapper.vm.enrollmentStatus).toBe("available to join");
+  });
+
   it("when the button Add is selected the class is added", async () => {
     const wrapper = shallowMount(CourseItem);
     expect(wrapper.vm.isAdded).toBe(false);
@@ -58,5 +92,12 @@ describe("CourseItem.vue", () => {
     expect(wrapper.vm.isAdded).toBe(false);
     await wrapper.setData({ isAdded: true });
     expect(wrapper.find("button").text()).toBe(buttonText);
+  });
+
+  it("Emits addCourse event when AddCourse button is clicked", async () => {
+    const wrapper = shallowMount(CourseItem);
+    await wrapper.find("[data-testid='sendAdd']").trigger("click");
+    expect(wrapper.emitted("addCourse")).toBe(true);
+    expect(wrapper.emitted("addCourse")[0]).toEqual([wrapper.vm.course.id]);
   });
 });
