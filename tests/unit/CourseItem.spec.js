@@ -97,7 +97,7 @@ describe("CourseItem.vue", () => {
   it("Emits addCourse event when AddCourse button is clicked", async () => {
     const wrapper = shallowMount(CourseItem);
     await wrapper.find("[data-testid='sendAdd']").trigger("click");
-    expect(wrapper.emitted("addCourse")).toBe(true);
+    expect(wrapper.emitted("addCourse")).toBeTruthy();
     expect(wrapper.emitted("addCourse")[0]).toEqual([wrapper.vm.course.id]);
   });
 });
